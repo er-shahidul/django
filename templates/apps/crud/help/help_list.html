@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>helps</h1>
+<ul>
+    {% for server in object_list %}
+    <li>{{ server.name }}  :
+    <a href="{% url "help_edit" server.id %}">{{ server.ip }}</a>
+    <a href="{% url "help_delete" server.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "help_new" %}">New</a>
+
+</body>
+</html>
