@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from apps.crud.forms.helpForm import HelpForm
 from apps.crud.models.help import Help
 
 
+@login_required(login_url="/admin/login")
 def help_list(request, template_name='apps/crud/help/help_list.html'):
     helps = Help.objects.all()
     data = {}

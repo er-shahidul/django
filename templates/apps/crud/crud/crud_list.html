@@ -6,17 +6,22 @@
 </head>
 <body>
 
-<h1>cruds</h1>
-<ul>
-    {% for server in object_list %}
-    <li>{{ server.name }}  :
-    <a href="{% url "crud_edit" server.id %}">{{ server.ip }}</a>
-    <a href="{% url "crud_delete" server.id %}">delete</a>
-    </li>
-    {% endfor %}
-</ul>
-
-<a href="{% url "crud_new" %}">New</a>
+{% if user.is_authenticated %}
+    <h1>cruds</h1>
+    <ul>
+        {% for server in object_list %}
+            <li>{{ server.name }} :
+                <a href="{% url "crud_edit" server.id %}">{{ server.ip }}</a>
+                <a href="{% url "crud_delete" server.id %}">delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if perms.crud.add_crud %}
+        <a href="{% url "crud_new" %}">New</a>
+    {% endif %}
+{% else %}
+    <p>Please log in.</p>
+{% endif %}
 
 </body>
 </html>

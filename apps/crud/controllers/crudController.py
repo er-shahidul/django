@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from apps.crud.forms.crudForm import CrudForm
 from apps.crud.models.crud import Crud
+from django.contrib.auth.decorators import permission_required
 
 
 def crud_list(request, template_name='apps/crud/crud/crud_list.html'):
@@ -11,6 +12,7 @@ def crud_list(request, template_name='apps/crud/crud/crud_list.html'):
     return render(request, template_name, data)
 
 
+@permission_required('crud.add_crud')
 def crud_create(request, template_name='apps/crud/crud/crud_form.html'):
     form = CrudForm(request.POST or None)
     if form.is_valid():
@@ -19,6 +21,7 @@ def crud_create(request, template_name='apps/crud/crud/crud_form.html'):
     return render(request, template_name, {'form': form})
 
 
+@permission_required('crud.change_crud')
 def crud_update(request, pk, template_name='apps/crud/crud/crud_form.html'):
     crud = get_object_or_404(Crud, pk=pk)
     form = CrudForm(request.POST or None, instance=crud)
@@ -28,6 +31,7 @@ def crud_update(request, pk, template_name='apps/crud/crud/crud_form.html'):
     return render(request, template_name, {'form': form})
 
 
+@permission_required('crud.delete_crud')
 def crud_delete(request, pk, template_name='apps/crud/crud/crud_confirm_delete.html'):
     crud = get_object_or_404(Crud, pk=pk)
     if request.method == 'POST':
