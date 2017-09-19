@@ -1,13 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 
+from apps.crud.forms.helpForm import HelpForm
 from apps.crud.models.help import Help
-
-
-class HelpForm(ModelForm):
-    class Meta:
-        model = Help
-        fields = ['name', 'order']
 
 
 def help_list(request, template_name='apps/crud/help/help_list.html'):

@@ -1,13 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 
+from apps.crud.forms.crudForm import CrudForm
 from apps.crud.models.crud import Crud
-
-
-class CrudForm(ModelForm):
-    class Meta:
-        model = Crud
-        fields = ['name', 'ip', 'order']
 
 
 def crud_list(request, template_name='apps/crud/crud/crud_list.html'):
